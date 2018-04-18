@@ -6,14 +6,29 @@ media_folder: static/img
 public_folder: /img
 
 collections:
+  - label: "主页"
+    name: "index"
+    extension: "yml"
+    delete: "false"
+    files:
+      - label: "主页"
+        name: "index"
+        file: "src/data/index.yml"
+        fields:
+          - {label: "Title", name: "title"}
+          - {label: "Summary", name: "summary"}
+          - {label: "About Title", name: "about_title"}
+          - {label: "About Title", name: "about_title", widget: "markdown"}
+          
+
   - label: "业务"
     name: "services"
     extension: "yml"
+    delete: false
     files:
       - label: "室内业务"
         name: "indoor_services"
         file: "src/data/services/indoor.yml"
-        delete: false
         fields:
           - label: "室内业务"
             name: "services"
@@ -31,7 +46,6 @@ collections:
       - label: "屋外业务"
         name: "outdoor_services"
         file: "src/data/services/outdoor.yml"
-        delete: false
         fields:
           - label: "屋外业务"
             name: "services"
