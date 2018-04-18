@@ -6,31 +6,19 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "indoor_service"
-    label: "室内业务"
-    folder: "src/data/services"
-    filter: {field: "category", value: "indoor"}
-    create: true
+  - name: "services"
+    label: "业务范围"
+    folder: "src/data"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "category", name: "category", widget: "hidden", default: "indoor"}
-      - {label: "Thumbnail", name: "image", widget: "image", default: "http://via.placeholder.com/1290x720"}
-      - label: "Sub-Services"
-        name: "sub_services"
+      - label: "室内"
+        name: "indoor"
         widget: "list"
         fields:
           - {label: "Title", name: "title", widget: "string"}
-  - name: "outdoor_service"
-    label: "屋外业务"
-    folder: "src/data/services"
-    filter: {field: "category", value: "outdoor"}
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "category", name: "category", widget: "hidden", default: "outdoor"}
-      - {label: "Thumbnail", name: "image", widget: "image"}
-      - label: "Sub-Services"
-        name: "sub_services"
-        widget: "list"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Image", name: "image", widget: "image", required: false}
+          - label: "子项目"
+            name: "sub_items"
+            required: false
+            widget: "list"
+            field:
+              - {label: "Title", name: "title", widget: "string"}
