@@ -1,4 +1,2 @@
-indoor_services:
-  - title: "墙"
-    category: "indoor"
-    image: "http://via.placeholder.com/1280x720"
+services:
+  - title: 瓷砖
