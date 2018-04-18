@@ -8,15 +8,13 @@ public_folder: /img
 collections:
   - label: "业务"
     name: "services"
+    delete: false
+    editor:
+      preview: false
     files:
-      - label: "Gallery"
-        name: "galleryImages"
-        widget: "list"
-        field:
-          - {label: Image, name: image, widget: image}
-      - label: "室内业务"
-        name: "indoor"
-        file: "src/data/services/indoor.md"
+      - name: "indoor"
+        label: "室内业务"
+        file: "src/data/services/indoor.yml"
         widget: "list"
         fields:
           - {label: "Title", name: "title", widget: "string"}
@@ -25,9 +23,10 @@ collections:
             name: "sub_items"
             required: false
             widget: "list"
-      - label: "屋外业务"
-        name: "outdoor"
-        file: "src/data/services/outdoor.md"
+
+      - name: "outdoor"
+        label: "屋外业务"
+        file: "src/data/services/outdoor.yml"
         widget: "list"
         fields:
           - {label: "Title", name: "title", widget: "string"}
