@@ -11,15 +11,18 @@ collections:
     extension: "yml"
     delete: "false"
     files:
-      - label: "主页"
-        name: "index"
-        file: "src/data/index.yml"
+      - label: "Header"
+        name: "header"
+        file: "src/data/header.yml"
         fields:
           - {label: "Title", name: "title"}
           - {label: "Summary", name: "summary"}
-          - {label: "About Title", name: "about_title"}
-          - {label: "About Title", name: "about_title", widget: "markdown"}
-          
+      - label: "About"
+        name: "about"
+        file: "src/data/about.yml"
+        fields:
+          - {label: "Title", name: "title"}
+          - {label: "Summary", name: "summary", widget: "markdown"}
 
   - label: "业务"
     name: "services"
