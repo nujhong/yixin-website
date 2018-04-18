@@ -12,7 +12,7 @@ collections:
     files:
       - label: "室内业务"
         name: "indoor_services"
-        file: "src/data/indoor_services.yml"
+        file: "src/data/services/indoor.yml"
         fields:
           - label: "室内业务"
             name: "services"
@@ -27,7 +27,7 @@ collections:
                 required: "false"
       - label: "屋外业务"
         name: "outdoor_services"
-        file: "src/data/outdoor_services.yml"
+        file: "src/data/services/outdoor.yml"
         fields:
           - label: "屋外业务"
             name: "services"
