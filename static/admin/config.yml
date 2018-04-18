@@ -6,31 +6,37 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - label: "室内业务"
-    name: "indoor_services"
-    folder: "src/data/services"
+  - label: "业务"
+    name: "services"
     extension: "yml"
-    create: true
-    filter: {field: "category", value: "indoor"}
-    fields:
-      - {label: "Category", name: "category", widget: "hidden", default: "indoor"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Image", name: "image", widget: "image", required: false}
-      - name: "sub_items"
-        label: "子项目"
-        widget: "list"
-        required: "false"
-  - label: "屋外业务"
-    name: "outdoor_services"
-    folder: "src/data/services"
-    extension: "yml"
-    create: true
-    filter: {field: "category", value: "outdoor"}
-    fields:
-      - {label: "Category", name: "category", widget: "hidden", default: "outdoor"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Image", name: "image", widget: "image", required: false}
-      - name: "sub_items"
-        label: "子项目"
-        widget: "list"
-        required: "false"
+    files:
+      - label: "室内业务"
+        name: "indoor_services"
+        file: "src/data/indoor_services.yml"
+        fields:
+          - label: "室内业务"
+            name: "services"
+            widget: "list"
+            fields:
+              - {label: "Category", name: "category", widget: "hidden", default: "indoor"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false, default: "http://via.placeholder.com/1280x720"}
+              - name: "sub_items"
+                label: "子项目"
+                widget: "list"
+                required: "false"
+      - label: "屋外业务"
+        name: "outdoor_services"
+        file: "src/data/outdoor_services.yml"
+        fields:
+          - label: "屋外业务"
+            name: "services"
+            widget: "list"
+            fields:
+              - {label: "Category", name: "category", widget: "hidden", default: "indoor"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false, default: "http://via.placeholder.com/1280x720"}
+              - name: "sub_items"
+                label: "子项目"
+                widget: "list"
+                required: "false"

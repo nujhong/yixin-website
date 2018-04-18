@@ -15,11 +15,11 @@ const ServicesList = ({ data }) => (
             <Column isSize='1/3'>
               <Card>
                 <CardImage>
-                  <Image isRatio='16:9' src={item.frontmatter.image} />
+                  <Image isRatio='16:9' src={item.image} />
                 </CardImage>
                 <CardFooter>
                   <CardFooterItem>
-                    {item.frontmatter.title}
+                    {item.title}
                   </CardFooterItem>
                 </CardFooter>
               </Card>

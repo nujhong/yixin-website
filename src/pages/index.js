@@ -8,6 +8,7 @@ import ServicesList from '../components/ServicesList';
 import { Container, Section, Hero, HeroBody } from 'bloomer';
 
 const IndexPage = ({ data }) => {
+  // const { edges: services } = data.allServicesYaml;
   console.log(data)
   return (
     <div>
@@ -33,16 +34,16 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage
 
-export const pageQuery = graphql`
-  query IndexQuery {
-    allServicesYaml {
-      edges {
-        node {
-          services {
-            title
-          }
-        }
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query IndexQuery {
+//     allServicesYaml {
+//       edges {
+//         node {
+//           title
+//           image
+//           sub_items
+//         }
+//       }
+//     }
+//   }
+// `
