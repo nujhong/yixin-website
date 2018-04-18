@@ -1,1 +1,5 @@
-services: []
+services:
+  - image: /img/pexels-photo-908290.jpeg
+    sub_items:
+      - 修/铺瓷砖
+    title: 瓷砖
