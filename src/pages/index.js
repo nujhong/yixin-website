@@ -34,16 +34,25 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage
 
-// export const pageQuery = graphql`
-//   query IndexQuery {
-//     allServicesYaml {
-//       edges {
-//         node {
-//           title
-//           image
-//           sub_items
-//         }
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  query IndexQuery {
+    allSectionsYaml {
+      edges {
+        node {
+          title
+          summary
+          image
+        }
+      }
+    }
+    allServicesYaml {
+      edges {
+        node {
+          title
+          image
+          sub_items
+        }
+      }
+    }
+  }
+`

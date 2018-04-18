@@ -29,8 +29,15 @@ collections:
         file: "src/data/sections/service.yml"
         fields:
           - {label: "Title", name: "title"}
-          - label: "Services"
-            name: "services"
+          - label: "室内"
+            name: "indoor_services"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "High Demand Service", name: "tags", widget: "list"}
+          - label: "屋外"
+            name: "outdoor_services"
             widget: "object"
             fields:
               - {label: "Title", name: "title"}
