@@ -6,12 +6,12 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "services"
-    label: "业务范围"
-    folder: "src/data"
-    fields:
-      - label: "室内"
+  - label: "业务"
+    name: "services"
+    files:
+      - label: "室内业务"
         name: "indoor"
+        file: "src/data/services/indoor.md"
         widget: "list"
         fields:
           - {label: "Title", name: "title", widget: "string"}
@@ -20,5 +20,16 @@ collections:
             name: "sub_items"
             required: false
             widget: "list"
-            field:
-              - {label: "Title", name: "title", widget: "string"}
+            default: [""]
+      - label: "屋外业务"
+        name: "outdoor"
+        file: "src/data/services/outdoor.md"
+        widget: "list"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Image", name: "image", widget: "image", required: false}
+          - label: "子项目"
+            name: "sub_items"
+            required: false
+            widget: "list"
+            default: [""]
