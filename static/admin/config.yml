@@ -11,7 +11,6 @@ collections:
     folder: "src/data/services"
     filter: {field: "category", value: "indoor"}
     create: true
-    slug: "{{name}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "category", name: "category", widget: "hidden", default: "indoor"}
@@ -26,7 +25,6 @@ collections:
     folder: "src/data/services"
     filter: {field: "category", value: "outdoor"}
     create: true
-    slug: "{{name}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "category", name: "category", widget: "hidden", default: "outdoor"}
