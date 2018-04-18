@@ -3,7 +3,8 @@ services:
     sub_items:
       - 修/铺瓷砖
     title: 瓷砖
-  - sub_items:
+  - image: /img/pexels-photo-368754.jpeg
+    sub_items:
       - 修/铺木地板
       - 木地板打磨抛光
       - 木地板抛光上油
