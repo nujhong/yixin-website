@@ -13,16 +13,22 @@ collections:
     files:
       - label: "Header"
         name: "header"
-        file: "src/data/header.yml"
+        file: "src/data/sections/header.yml"
         fields:
           - {label: "Title", name: "title"}
           - {label: "Summary", name: "summary"}
       - label: "About"
         name: "about"
-        file: "src/data/about.yml"
+        file: "src/data/sections/about.yml"
         fields:
           - {label: "Title", name: "title"}
           - {label: "Summary", name: "summary", widget: "markdown"}
+      - label: "Service"
+        name: "service"
+        file: "src/data/sections/service.yml"
+        fields:
+          - {label: "Title", name: "title"}
+          - {label: "Relation", name: "relation", collection: "services"}
 
   - label: "业务"
     name: "services"
