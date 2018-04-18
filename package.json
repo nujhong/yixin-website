@@ -12,6 +12,7 @@
     "gatsby-source-filesystem": "^1.5.23",
     "gatsby-transformer-remark": "^1.7.33",
     "gatsby-transformer-sharp": "^1.6.21",
+    "gatsby-transformer-yaml": "^1.5.16",
     "lodash": "^4.17.5",
     "lodash-webpack-plugin": "^0.11.4",
     "react": "^16.2.0",

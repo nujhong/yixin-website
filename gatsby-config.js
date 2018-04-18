@@ -28,12 +28,7 @@ module.exports = {
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [],
-      },
-    },
+    'gatsby-transformer-yaml',
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
