@@ -15,6 +15,7 @@ class Header extends Component {
   }
 
   render() {
+    const { title, summary, image } = this.props.data;
     return (
       <Hero isColor='dark' isSize='medium'>
         <HeroHeader>
@@ -27,11 +28,6 @@ class Header extends Component {
                 <NavbarBurger isActive={this.state.isActive} onClick={this.handleToggle} />
               </NavbarBrand>
               <NavbarMenu isActive={this.state.isActive} onClick={this.handleToggle}>
-                <NavbarStart>
-                    <NavbarItem href='#/'>Home</NavbarItem>
-                    <NavbarItem href='#/documentation'>Documentation
-                    </NavbarItem>
-                </NavbarStart>
                 <NavbarEnd>
                   <NavbarItem href='#/'>网上报价</NavbarItem>
                   <NavbarItem href='#/'>联系我们</NavbarItem>
@@ -41,11 +37,11 @@ class Header extends Component {
           </Navbar>
         </HeroHeader>
 
-        <HeroBody style={styles.hero}>
+        <HeroBody style={{background: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('+ image + '), center center', backgroundSize: 'cover'}}>
           <Container hasTextAlign='centered'>
             <Block>
-              <Title isSize='1'>易信房屋建筑装修</Title>
-              <Subtitle>我们为您解决澳洲收费昂贵，语言沟通困难，各种疑难的问题。欢迎免费咨询</Subtitle>
+              <Title isSize='1'>{title}</Title>
+              <Subtitle>{summary}</Subtitle>
             </Block>
             <Block>
               <Columns isCentered>
@@ -63,12 +59,5 @@ class Header extends Component {
     )
   }
 };
-
-const styles = {
-  hero: {
-    background: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?cs=srgb&dl=brick-brickwall-brickwork-276514.jpg&fm=jpg") center center',
-    backgroundSize: 'cover',
-  }
-}
 
 export default Header;
