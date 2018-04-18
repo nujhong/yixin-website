@@ -24,7 +24,7 @@ const IndexPage = ({ data }) => {
       </Section>
       <Section>
         <Container>
-          <ServicesList data={services} />
+          {/* <ServicesList data={services} /> */}
         </Container>
       </Section>
     </div>
