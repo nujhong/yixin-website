@@ -15,20 +15,30 @@ collections:
       - name: "indoor"
         label: "室内业务"
         file: "src/data/services/indoor.yml"
-        widget: "list"
         fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Image", name: "image", widget: "image", required: false}
-          - label: "子项目"
-            name: "sub_items"
-
+          - name: "services"
+            label: "Services"
+            label_singular: "Service"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - name: "sub_items"
+                label: "Sub Items"
+                widget: "list"
+                required: false
       - name: "outdoor"
         label: "屋外业务"
         file: "src/data/services/outdoor.yml"
-        widget: "list"
         fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Image", name: "image", widget: "image", required: false}
-          - label: "子项目"
-            name: "sub_items"
-            required: false
+          - name: "services"
+            label: "Services"
+            label_singular: "Service"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - name: "sub_items"
+                label: "Sub Items"
+                widget: "list"
+                required: false

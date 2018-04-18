@@ -35,10 +35,12 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allMarkdownRemark {
+    allServicesYaml {
       edges {
         node {
-          id
+          children {
+            id
+          }
         }
       }
     }
