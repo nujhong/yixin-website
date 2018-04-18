@@ -13,14 +13,17 @@ collections:
       - label: "室内业务"
         name: "indoor_services"
         file: "src/data/services/indoor.yml"
+        delete: false
         fields:
           - label: "室内业务"
             name: "services"
             widget: "list"
             fields:
-              - {label: "Category", name: "category", widget: "hidden", default: "indoor"}
               - {label: "Title", name: "title", widget: "string"}
-              - {label: "Image", name: "image", widget: "image", required: false, default: "http://via.placeholder.com/1280x720"}
+              - label: "图片"
+                name: "image"
+                widget: "image"
+                default: "http://via.placeholder.com/1280x720"
               - name: "sub_items"
                 label: "子项目"
                 widget: "list"
@@ -28,14 +31,17 @@ collections:
       - label: "屋外业务"
         name: "outdoor_services"
         file: "src/data/services/outdoor.yml"
+        delete: false
         fields:
           - label: "屋外业务"
             name: "services"
             widget: "list"
             fields:
-              - {label: "Category", name: "category", widget: "hidden", default: "indoor"}
               - {label: "Title", name: "title", widget: "string"}
-              - {label: "Image", name: "image", widget: "image", required: false, default: "http://via.placeholder.com/1280x720"}
+              - label: "图片"
+                name: "image"
+                widget: "image"
+                default: "http://via.placeholder.com/1280x720"
               - name: "sub_items"
                 label: "子项目"
                 widget: "list"
