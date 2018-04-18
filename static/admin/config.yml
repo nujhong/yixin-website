@@ -9,6 +9,11 @@ collections:
   - label: "业务"
     name: "services"
     files:
+      - label: "Gallery"
+        name: "galleryImages"
+        widget: "list"
+        field:
+          - {label: Image, name: image, widget: image}
       - label: "室内业务"
         name: "indoor"
         file: "src/data/services/indoor.md"
@@ -20,7 +25,6 @@ collections:
             name: "sub_items"
             required: false
             widget: "list"
-            default: [""]
       - label: "屋外业务"
         name: "outdoor"
         file: "src/data/services/outdoor.md"
