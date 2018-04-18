@@ -1,3 +1,6 @@
 ---
-- title: "瓷砖"
+title: 瓷砖
+sub_items:
+  - 修/铺瓷砖
 ---
+
