@@ -24,27 +24,33 @@ class FileUploader extends Component {
 
   render() {
     return (
-      <form>
-        <Dropzone
-          multiple
-          accept="image/*"
-          onDrop={this.onDrop.bind(this)}>
-          {({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
-            if (isDragActive) {
-              return "This file is authorized";
-            }
-            if (isDragReject) {
-              return "This file is not authorized";
-            }
-            return acceptedFiles.length || rejectedFiles.length
-              ?
-              <div>{this.state.imageFiles.map((file) =>
-                <figure style={{flex: '1'}} key={file}><img alt={file} src={file} /></figure>
-              )}</div>
-              : "Upload your image for a quote";
-          }}
-        </Dropzone>
-      </form>
+      <div className="file is-boxed is-primary">
+        <label className="file-label">
+            <span className="file-cta">
+              <Dropzone
+                multiple
+                accept="image/*"
+                style={{position: 'relative'}}
+                onDrop={this.onDrop.bind(this)}>
+                {({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
+                  if (isDragActive) {
+                    return "This file is authorized";
+                  }
+                  if (isDragReject) {
+                    return "This file is not authorized";
+                  }
+                }}
+              </Dropzone>
+              <span className="file-icon">
+                <i className="fas fa-upload"></i>
+              </span>
+              <span className="file-label">
+                Choose a file…
+              </span>
+            </span>
+
+        </label>
+      </div>
     )
   }
 }
