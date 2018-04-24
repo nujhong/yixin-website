@@ -11,38 +11,19 @@ collections:
     extension: "yml"
     delete: false
     files:
-      - label: "Header"
-        name: "header"
-        file: "src/data/sections/header.yml"
-        fields:
-          - {label: "Title", name: "title"}
-          - {label: "Summary", name: "summary"}
-          - {label: "image", name: "image", widget: "image"}
       - label: "About"
         name: "about"
-        file: "src/data/sections/about.yml"
+        file: "src/data/content/about.yml"
         fields:
           - {label: "Title", name: "title"}
           - {label: "Summary", name: "summary", widget: "markdown"}
-      - label: "Service"
-        name: "service"
-        file: "src/data/sections/service.yml"
-        fields:
-          - {label: "Title", name: "title"}
-          - label: "室内"
-            name: "indoor_services"
-            widget: "object"
+          - label: "Column"
+            name: "column"
+            widget: "list"
             fields:
               - {label: "Title", name: "title"}
               - {label: "Image", name: "image", widget: "image"}
-              - {label: "High Demand Service", name: "tags", widget: "list"}
-          - label: "屋外"
-            name: "outdoor_services"
-            widget: "object"
-            fields:
-              - {label: "Title", name: "title"}
-              - {label: "Image", name: "image", widget: "image"}
-              - {label: "High Demand Service", name: "tags", widget: "list"}
+              - {label: "Text", name: "text", widget: "markdown"}
 
   - label: "业务"
     name: "services"

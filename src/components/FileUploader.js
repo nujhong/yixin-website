@@ -1,58 +1,54 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import styled from 'styled-components';
+import { Image } from 'bloomer';
 
-class FileUploader extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      imageFiles: []
-    }
-  }
-
-  onDrop(acceptedFiles) {
-    acceptedFiles.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            this.setState({ imageFiles: [ ...this.state.imageFiles, reader.result ] })
-        };
-        reader.onabort = () => console.log('file reading was aborted');
-        reader.onerror = () => console.log('file reading has failed');
-
-        reader.readAsDataURL(file)
-    });
-  }
-
-  render() {
-    return (
-      <div className="file is-boxed is-primary">
-        <label className="file-label">
-            <span className="file-cta">
-              <Dropzone
-                multiple
-                accept="image/*"
-                style={{position: 'relative'}}
-                onDrop={this.onDrop.bind(this)}>
-                {({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
-                  if (isDragActive) {
-                    return "This file is authorized";
-                  }
-                  if (isDragReject) {
-                    return "This file is not authorized";
-                  }
-                }}
-              </Dropzone>
-              <span className="file-icon">
-                <i className="fas fa-upload"></i>
-              </span>
-              <span className="file-label">
-                Choose a file…
-              </span>
-            </span>
-
-        </label>
-      </div>
-    )
-  }
-}
+const FileUploader = ({files, handleDrop}) => (
+  <ThumbnailWrapper>
+    <StyledDropzone
+      multiple
+      accept="image/*"
+      onDrop={handleDrop}>
+      {({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
+        if (isDragActive) {
+          return "This file is authorized";
+        }
+        if (isDragReject) {
+          return "This file is not authorized";
+        }
+      }}
+    </StyledDropzone>
+    {files.map(file => <Thumbnail isSize='128x128' src={file.preview}/>)}
+  </ThumbnailWrapper>
+)
 
 export default FileUploader
+
+const StyledDropzone = styled(Dropzone)`
+  width: 128px;
+  height: 128px;
+  margin: 1px;
+  @media (min-width: 769px) {
+    margin: 5px;
+  }
+  border-width: 1px;
+  border-color: rgb(102, 102, 102);
+  border-style: dashed;
+  border-radius: 5px;
+`
+
+const Thumbnail = styled(Image)`
+  display: inline-flex;
+  margin: 1px;
+  @media (min-width: 769px) {
+    margin: 5px;
+  }
+`
+const ThumbnailWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1px;
+  @media (min-width: 769px) {
+    padding: 5px;
+  }
+`

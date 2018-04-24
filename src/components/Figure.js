@@ -13,7 +13,7 @@ const StyledFigure = (props) => {
         )}
       </HoverableFigure>
     ) : (
-      <Figure className='image is-16by9 is-clipped' {...props} >
+      <Figure className='image is-4by3 is-clipped' {...props} >
         <img src={props.src} alt={props.alt || ''} />
         {props.children && (
           <FigCaption className='is-overlay has-text-white'>

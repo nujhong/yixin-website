@@ -10,7 +10,6 @@ import Footer from '../components/Footer'
 import { Container, Section, Hero, HeroBody } from 'bloomer'
 
 class IndexPage extends Component {
-
   constructor(props) {
     super(props)
     this.state = { showModal: false }
@@ -25,25 +24,24 @@ class IndexPage extends Component {
     return (
       <div>
         <Header />
-        <HeroSection toggleModal={this.toggleModal}/>
+        <HeroSection toggleModal={this.toggleModal} />
         <Section>
           <Container>
             <About />
           </Container>
         </Section>
-        <Section className='has-background-white-bis'>
+        <Section className="has-background-white-bis">
           <Container>
             <Services />
           </Container>
         </Section>
-        <Section className='has-background-grey'>
+        <Section className="has-background-grey">
           <Container>
             {services.map(({ node: category }, index) => (
               <ServicesList data={category.services} index={index} />
             ))}
           </Container>
         </Section>
-        <ContactForm showModal={this.state.showModal} toggleModal={this.toggleModal} />
         <Footer />
       </div>
     )

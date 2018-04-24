@@ -11,7 +11,7 @@ const Services = () => [
   </Block>,
   <Columns>
     <Column isSize='1/2'>
-      <Animation className='wow fadeIn'>
+      <Animation className='wow fadeIn' data-wow-offset="10">
         <Figure
           alt='' src='https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'>
           <Block hasTextAlign='centered'>
@@ -29,7 +29,7 @@ const Services = () => [
       </Animation>
     </Column>
     <Column isSize='1/2'>
-      <Animation className='wow fadeIn'>
+      <Animation className='wow fadeIn' data-wow-offset="10">
         <Figure
           alt='' src='https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350'>
           <Block hasTextAlign='centered'>

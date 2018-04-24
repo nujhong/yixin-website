@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Headroom from 'react-headroom'
+import Link from 'gatsby-link'
 import { Container, Navbar, NavbarBrand, NavbarBurger, NavbarItem, NavbarMenu, NavbarStart, NavbarLink, NavbarEnd } from 'bloomer'
 
 class Header extends Component {
@@ -16,18 +17,15 @@ class Header extends Component {
   render() {
     return (
       <Headroom>
-        <Navbar className='is-light'>
+        <Navbar className='is-primary'>
           <Container>
             <NavbarBrand>
-              <NavbarItem>
-                易信
-              </NavbarItem>
+              <Link to="/" className="navbar-item">易信</Link>
               <NavbarBurger isActive={this.state.isActive} onClick={this.handleToggle} />
             </NavbarBrand>
             <NavbarMenu isActive={this.state.isActive} onClick={this.handleToggle}>
               <NavbarEnd>
-                <NavbarItem href='#/'>网上报价</NavbarItem>
-                <NavbarItem href='#/'>联系我们</NavbarItem>
+                <Link to="/contact" className="navbar-item">网上报价</Link>
               </NavbarEnd>
             </NavbarMenu>
           </Container>
