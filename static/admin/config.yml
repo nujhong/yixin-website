@@ -10,21 +10,23 @@ collections:
     name: "index"
     extension: "yml"
     delete: false
+    editor:
+      preview: false
     files:
       - label: "About"
         name: "about"
         file: "src/data/content/about.yml"
         fields:
           - {label: "Title", name: "title"}
-          - {label: "Summary", name: "summary", widget: "markdown"}
-          - label: "Column"
-            name: "column"
+          - {label: "Summary", name: "summary"}
+          - label: "Columns"
+            name: "columns"
             widget: "list"
             fields:
               - {label: "Title", name: "title"}
               - {label: "Image", name: "image", widget: "image"}
-              - {label: "Text", name: "text", widget: "markdown"}
-              - {label: "Credit", name: "credit", widget: "html"}
+              - {label: "Text", name: "text", widget: "text"}
+              - {label: "Credit", name: "credit", required: false}
 
   - label: "业务"
     name: "services"

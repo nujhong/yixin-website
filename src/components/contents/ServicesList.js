@@ -11,8 +11,8 @@ import {
   Title,
 } from 'bloomer'
 import styled from 'styled-components'
-import Figure from './Figure'
-import Block from './Block'
+import Figure from '../Figure'
+import Block from '../Block'
 
 const StyledTitle = styled(Title)`
   box-shadow: -1px -1px 0 1px #505050;

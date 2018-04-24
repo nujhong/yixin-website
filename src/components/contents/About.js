@@ -10,21 +10,31 @@ import {
   Title,
 } from 'bloomer'
 
-import Table from './Table'
-import Animation from './Animation'
+import Table from '../Table'
+import Animation from '../Animation'
 
-const About = ({ data }) => (
+export default ({ data: { title, summary, columns } }) => (
   <div className="columns">
     <div className="column is-12">
       <div className="content has-text-centered">
-        <h1 className="subtitle">超过30年房屋建筑装潢设计经验</h1>
-        <p className="is-size-3">收费合理</p>
+        <h1 className="subtitle">{title}</h1>
+        <p className="is-size-3">{summary}</p>
       </div>
-      <Animation className="wow fadeIn">
-        <Table />
-      </Animation>
+      <Animation className="wow fadeIn" />
+      {console.log(columns)}
     </div>
   </div>
 )
 
-export default About
+export const query = graphql`
+  fragment AboutFragment on ContentYaml {
+    title
+    summary
+    columns {
+      title
+      summary
+      image
+      credit
+    }
+  }
+`

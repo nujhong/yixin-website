@@ -10,8 +10,8 @@ import {
   Title,
   Subtitle,
 } from 'bloomer'
-import Block from './Block'
-import Animation from './Animation'
+import Block from '../Block'
+import Animation from '../Animation'
 import styled from 'styled-components'
 
 const HeroSection = () => (

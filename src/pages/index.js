@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import Header from '../components/Header'
-import HeroSection from '../components/Hero'
-import About from '../components/About'
-import Services from '../components/Services'
-import ServicesList from '../components/ServicesList'
+import HeroSection from '../components/contents/Hero'
+import About from '../components/contents/About'
+import Services from '../components/contents/Services'
+import ServicesList from '../components/contents/ServicesList'
 import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import { Container, Section, Hero, HeroBody } from 'bloomer'
@@ -21,13 +21,14 @@ class IndexPage extends Component {
 
   render() {
     const { edges: services } = this.props.data.allServicesYaml
+
     return (
       <div>
         <Header />
         <HeroSection toggleModal={this.toggleModal} />
         <Section>
           <Container>
-            <About />
+            <About data={this.props.data.allContentYaml.edges[0].node} />
           </Container>
         </Section>
         <Section className="has-background-white-bis">
@@ -60,6 +61,13 @@ export const pageQuery = graphql`
             image
             sub_items
           }
+        }
+      }
+    }
+    allContentYaml {
+      edges {
+        node {
+          ...AboutFragment
         }
       }
     }
