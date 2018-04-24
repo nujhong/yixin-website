@@ -24,6 +24,7 @@ collections:
               - {label: "Title", name: "title"}
               - {label: "Image", name: "image", widget: "image"}
               - {label: "Text", name: "text", widget: "markdown"}
+              - {label: "Credit", name: "credit", widget: "html"}
 
   - label: "业务"
     name: "services"
