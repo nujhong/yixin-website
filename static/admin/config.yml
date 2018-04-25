@@ -8,7 +8,6 @@ public_folder: /img
 collections:
   - label: "主页"
     name: "index"
-    extension: "yml"
     delete: false
     editor:
       preview: false
@@ -26,8 +25,6 @@ collections:
               - {label: "Title", name: "title"}
               - {label: "Image", name: "image", widget: "image"}
               - {label: "Text", name: "text", widget: "text"}
-              - {label: "Credit", name: "credit", required: false}
-
   - label: "业务"
     name: "services"
     extension: "yml"

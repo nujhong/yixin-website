@@ -21,7 +21,7 @@ class IndexPage extends Component {
 
   render() {
     const { edges: services } = this.props.data.allServicesYaml
-
+    console.log(this.props.data.allContentYaml)
     return (
       <div>
         <Header />
