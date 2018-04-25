@@ -1,18 +1,28 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import './all.sass'
 
-const TemplateWrapper = ({ children }) => (
-  <div>
-    <Helmet title="易信房屋装修服务" />
-    <div>{children()}</div>
-  </div>
+export default ({
+	children,
+	data: {
+		site: {
+			siteMetadata: { title },
+		},
+	},
+}) => (
+	<div>
+		<Helmet title={title} />
+		<div>{children()}</div>
+	</div>
 )
 
-TemplateWrapper.propTypes = {
-  children: PropTypes.func,
-}
-
-export default TemplateWrapper
+export const query = graphql`
+	query LayoutQuery {
+		site {
+			siteMetadata {
+				title
+			}
+		}
+	}
+`

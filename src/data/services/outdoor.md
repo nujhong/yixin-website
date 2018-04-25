@@ -9,5 +9,5 @@ services:
     sub_items:
       - 铺草坪
     title: 草坪
+    category: outdoor
 ---
-

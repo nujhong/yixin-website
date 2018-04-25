@@ -41,7 +41,8 @@ collections:
             fields:
               - {label: "名称", name: "title", widget: "string"}
               - {label: "图片", name: "image", widget: "image"}
-              - {name: "sub_items",label: "子项目",  widget: "list", required: "false"}
+              - {label: "子项目", name: "sub_items", widget: "list", required: "false"}
+              - {label: "类别", name: "category", widget: "hidden", default: "{{slug}}" }
       - label: "屋外业务"
         name: "outdoor_services"
         file: "src/data/services/outdoor.md"

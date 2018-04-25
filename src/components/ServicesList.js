@@ -15,9 +15,14 @@ import { Transition, config } from 'react-spring'
 import Figure from './Figure'
 import Block from './Block'
 
-const StyledTitle = styled(Title)`
-	box-shadow: -1px -1px 0 1px #505050;
-	padding: 5%;
+const RaisedCard = styled(Card)`
+	transition-duration: 86ms;
+	transition-property: box-shadow, transform;
+	will-change: box-shadow, transform;
+	&:hover {
+		box-shadow: 0 3rem 3rem -1.25rem rgba(10, 10, 10, 0.1);
+		transform: translateY(-0.5rem);
+	}
 `
 
 const ServicesList = ({ items }) => (
@@ -30,16 +35,16 @@ const ServicesList = ({ items }) => (
 		>
 			{items.map((item, index) => styles => (
 				<Column isSize="1/3">
-					<Card style={{ styles }}>
+					<RaisedCard style={{ styles }}>
 						<CardImage>
 							<Figure src={item.image} isHoverable>
-								{item.sub_items.map(i => <span>{i}</span>)}
+								{item.sub_items.map(i => <span key={i}>{i}</span>)}
 							</Figure>
 						</CardImage>
 						<CardFooter>
 							<CardFooterItem>{item.title}</CardFooterItem>
 						</CardFooter>
-					</Card>
+					</RaisedCard>
 				</Column>
 			))}
 		</Transition>
