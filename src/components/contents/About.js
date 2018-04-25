@@ -21,11 +21,11 @@ export default ({ data: { title, summary, columns } }) => (
         <p className="is-size-3">{summary}</p>
       </div>
       <div className="columns">
-        {columns.map(({ title, text, image, credit }) => (
+        {columns.map(({ title, text, image, credit }, index) => (
           <div className="column">
             <Animation
               className="wow zoomIn content has-text-centered"
-              data-wow-duration=".6s"
+              data-wow-duration={`${(index + 1) * 0.3}s`}
             >
               <figure className="image is-128x128 is-margin-x-auto">
                 <img src={image} />
@@ -48,13 +48,7 @@ export const query = graphql`
       columns {
         title
         text
-        image {
-          childImageSharp {
-            resolutions {
-              src
-            }
-          }
-        }
+        image
       }
     }
   }

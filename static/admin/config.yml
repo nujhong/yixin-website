@@ -33,33 +33,25 @@ collections:
         name: "indoor_services"
         file: "src/data/services/indoor.md"
         fields:
-          - label: "室内业务"
+          - {label: "类别", name: "category"}
+          - {label: "标签", name: "tags", widget: "list"}
+          - label: "项目"
             name: "services"
             widget: "list"
             fields:
-              - {label: "Title", name: "title", widget: "string"}
-              - label: "图片"
-                name: "image"
-                widget: "image"
-                default: "http://via.placeholder.com/1280x720"
-              - name: "sub_items"
-                label: "子项目"
-                widget: "list"
-                required: "false"
+              - {label: "名称", name: "title", widget: "string"}
+              - {label: "图片", name: "image", widget: "image"}
+              - {name: "sub_items",label: "子项目",  widget: "list", required: "false"}
       - label: "屋外业务"
         name: "outdoor_services"
         file: "src/data/services/outdoor.md"
         fields:
-          - label: "屋外业务"
+          - {label: "类别", name: "category"}
+          - {label: "标签", name: "tags", widget: "list"}
+          - label: "项目"
             name: "services"
             widget: "list"
             fields:
-              - {label: "Title", name: "title", widget: "string"}
-              - label: "图片"
-                name: "image"
-                widget: "image"
-                default: "http://via.placeholder.com/1280x720"
-              - name: "sub_items"
-                label: "子项目"
-                widget: "list"
-                required: "false"
+              - {label: "名称", name: "title", widget: "string"}
+              - {label: "图片", name: "image", widget: "image"}
+              - {name: "sub_items",label: "子项目",  widget: "list", required: "false"}
