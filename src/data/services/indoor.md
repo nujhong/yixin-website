@@ -1,4 +1,8 @@
 ---
+tags:
+  - 围栏
+  - 园林
+  - 花架
 services:
   - image: /img/pexels-photo-908290.jpeg
     sub_items:
@@ -12,3 +16,4 @@ services:
       - 木地板平整修复
     title: 木地板
 ---
+
