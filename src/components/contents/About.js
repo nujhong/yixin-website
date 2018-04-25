@@ -41,13 +41,15 @@ export default ({ data: { title, summary, columns } }) => (
 )
 
 export const query = graphql`
-  fragment AboutFragment on ContentYaml {
-    title
-    summary
-    columns {
+  fragment AboutFragment on MarkdownRemark {
+    frontmatter {
       title
-      text
-      image
+      summary
+      columns {
+        title
+        text
+        image
+      }
     }
   }
 `

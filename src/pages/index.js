@@ -20,8 +20,9 @@ class IndexPage extends Component {
   }
 
   render() {
-    const { edges: services } = this.props.data.allServicesYaml
-    console.log(this.props.data.allContentYaml)
+    console.log(this.props)
+    const { services, contents } = this.props.data
+
     return (
       <div>
         <Header />
@@ -53,18 +54,20 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allServicesYaml {
+    serivces: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/services/" } }
+    ) {
       edges {
         node {
-          services {
-            title
-            image
-            sub_items
+          frontmatter {
+            services
           }
         }
       }
     }
-    allContentYaml {
+    contents: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/content/" } }
+    ) {
       edges {
         node {
           ...AboutFragment
