@@ -48,7 +48,13 @@ export const query = graphql`
       columns {
         title
         text
-        image
+        image {
+          childImageSharp {
+            resolutions {
+              src
+            }
+          }
+        }
       }
     }
   }

@@ -9,58 +9,49 @@ import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import { Container, Section, Hero, HeroBody } from 'bloomer'
 
-class IndexPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { showModal: false }
-  }
-
-  toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal })
-  }
-
-  render() {
-    console.log(this.props)
-    const { services, contents } = this.props.data
-
-    return (
-      <div>
-        <Header />
-        <HeroSection toggleModal={this.toggleModal} />
-        <Section>
-          <Container>
-            <About data={this.props.data.allContentYaml.edges[0].node} />
-          </Container>
-        </Section>
-        <Section className="has-background-white-bis">
-          <Container>
-            <Services />
-          </Container>
-        </Section>
-        <Section className="has-background-grey">
-          <Container>
-            {services.map(({ node: category }, index) => (
-              <ServicesList data={category.services} index={index} />
-            ))}
-          </Container>
-        </Section>
-        <Footer />
-      </div>
-    )
-  }
+const IndexPage = ({ data: { services, contents } }) => {
+  console.log(contents)
+  return (
+    <div>
+      <Header />
+      <HeroSection />
+      <Section>
+        <Container>
+          <About data={contents.edges[0].node.frontmatter} />
+        </Container>
+      </Section>
+      <Section className="has-background-white-bis">
+        <Container>
+          <Services />
+        </Container>
+      </Section>
+      <Section className="has-background-grey">
+        <Container>
+          {services.edges.map(({ node: category }, index) => (
+            <ServicesList data={category.frontmatter.services} index={index} />
+          ))}
+        </Container>
+      </Section>
+      <Footer />
+    </div>
+  )
 }
 
 export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    serivces: allMarkdownRemark(
+    services: allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/services/" } }
     ) {
       edges {
         node {
           frontmatter {
-            services
+            services {
+              title
+              image
+              sub_items
+            }
           }
         }
       }
