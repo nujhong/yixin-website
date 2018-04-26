@@ -40,6 +40,7 @@ export const pageQuery = graphql`
 						services {
 							title
 							image
+							category
 							sub_items
 						}
 					}

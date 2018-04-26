@@ -1,16 +1,19 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import update from 'immutability-helper'
-import { Button, Columns, Column, Content } from 'bloomer'
+import { Columns, Column, Content } from 'bloomer'
 import ServicesList from '../ServicesList'
 import Figure from '../Figure'
 import Block from '../Block'
 import Animation from '../Animation'
+import MdUnfoldMore from 'react-icons/lib/md/unfold-more'
+import MdUnfoldLess from 'react-icons/lib/md/unfold-less'
 
 class Services extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			isToggled: false,
 			items: _.flatMap(
 				props.data.edges,
 				edge => edge.node.frontmatter.services
@@ -19,13 +22,10 @@ class Services extends Component {
 	}
 
 	handleClick = node => {
-		let newNode = _.forEach(node, item => _.merge(item, { isActive: true }))
-		console.log(update(node, { $merge: { isActive: true } }))
-		console.log(newNode)
+		console.log(node)
 	}
 
 	render() {
-		console.log(this.state.items)
 		const { edges: categories } = this.props.data
 		return (
 			<div>
@@ -34,7 +34,11 @@ class Services extends Component {
 						<div className="title is-2 has-text-centered">我们的服务范围</div>
 						<Columns>
 							{categories.map(({ node }) => (
-								<Column isSize="1/2" key={node.id}>
+								<Column
+									isSize="1/2"
+									key={node.id}
+									id={node.frontmatter.category}
+								>
 									<Animation className="wow fadeIn" data-wow-offset="10">
 										<Figure
 											alt=""
@@ -56,15 +60,11 @@ class Services extends Component {
 														))}
 													</ul>
 												</nav>
-												<Button
-													isColor="white"
-													isOutlined
-													onClick={() =>
-														this.handleClick(node.frontmatter.services)
-													}
-												>
-													查看详情
-												</Button>
+												<ViewButton
+													node={node}
+													isToggled={this.state.isToggled}
+													handleClick={this.handleClick}
+												/>
 											</Block>
 										</Figure>
 									</Animation>
@@ -74,7 +74,7 @@ class Services extends Component {
 					</div>
 				</div>
 
-				<div className="section has-background-light">
+				<div id="具体项目" className="section has-background-light">
 					<div className="container">
 						<ServicesList items={this.state.items} />
 					</div>
@@ -83,5 +83,16 @@ class Services extends Component {
 		)
 	}
 }
+
+const ViewButton = ({ node, handleClick, isToggled }) => (
+	<a
+		className="button is-white is-radiusless is-outlined"
+		href="#具体项目"
+		aria-label="查看更多"
+		onClick={() => handleClick(node)}
+	>
+		{isToggled ? <MdUnfoldLess /> : <MdUnfoldMore />}查看详情
+	</a>
+)
 
 export default Services

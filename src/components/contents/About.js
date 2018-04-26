@@ -9,7 +9,7 @@ import {
 	Content,
 	Title,
 } from 'bloomer'
-
+import styled from 'styled-components'
 import Table from '../Table'
 import Animation from '../Animation'
 
@@ -21,11 +21,11 @@ export default ({ data: { title, summary, columns } }) => (
 				<p className="is-size-3">{summary}</p>
 			</div>
 			<div className="columns">
-				{columns.map(({ title, text, image, credit }, index) => (
+				{columns.map(({ title, text, image, credit }, i, { length }) => (
 					<div className="column">
 						<div className="content has-text-centered">
 							<figure className="image is-192x192 is-centered">
-								<img src={image} />
+								<PaddedImg src={image} isLast={length - 1 === i} />
 							</figure>
 							<h2 className="title is-4">{title}</h2>
 							<p>{text}</p>
@@ -49,4 +49,7 @@ export const query = graphql`
 			}
 		}
 	}
+`
+const PaddedImg = styled.img`
+	padding: ${props => (props.isLast ? '1rem' : '0')};
 `

@@ -3,6 +3,10 @@ import Helmet from 'react-helmet'
 
 import './all.sass'
 
+if (typeof window !== 'undefined') {
+	require('smooth-scroll')('a[href*="#"]')
+}
+
 export default ({
 	children,
 	data: {
