@@ -6,8 +6,8 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - label: "Page"
-    name: "page"
+  - label: "Pages"
+    name: "pages"
     delete: false
     files:
       - label: "着陆页"
@@ -34,7 +34,9 @@ collections:
             name: "columns"
             widget: "list"
             fields:
-              - {label: "内容", name: "content", widget: "markdown"}
+              - {label: "标题", name: "heading"}
+              - {label: "段落", name: "paragraph", widget: "text"}
+              - {label: "图片", name: "image", widget: "image"}
           # Section - services
           - {label: "业务范围 - 标题", name: "Services_title", required: false}
           - label: "业务类型"

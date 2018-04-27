@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import Header from '../components/Header'
-import HeroSection from '../components/contents/Hero'
+import Hero from '../components/contents/Hero'
 import About from '../components/contents/About'
 import Services from '../components/contents/Services'
 import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
-import { Container, Section, Hero, HeroBody } from 'bloomer'
+import { Container, Section, HeroBody } from 'bloomer'
 
-const IndexPage = ({ data: { contents, services } }) => (
+const IndexPage = ({
+	data: {
+		markdownRemark: { frontmatter },
+		allMarkdownRemark: data,
+	},
+}) => (
 	<div>
 		<Header />
-		<HeroSection />
+		<Hero frontmatter={frontmatter} />
 		<Section>
 			<Container>
-				<About data={contents.edges[1].node.frontmatter} />
+				<About frontmatter={frontmatter} />
 			</Container>
 		</Section>
-		<Services data={services} />
+		<Services frontmatter={frontmatter} data={data} />
 		<Footer />
 	</div>
 )
@@ -26,33 +31,24 @@ export default IndexPage
 
 export const pageQuery = graphql`
 	query IndexQuery {
-		services: allMarkdownRemark(
-			filter: { fileAbsolutePath: { regex: "/services/" } }
+		allMarkdownRemark(
+			filter: { fileAbsolutePath: { regex: "/data/services/" } }
 		) {
 			edges {
 				node {
-					id
 					frontmatter {
+						title
+						image
+						sub_items
 						category
-						tags
-						services {
-							title
-							image
-							category
-							sub_items
-						}
 					}
 				}
 			}
 		}
-		contents: allMarkdownRemark(
-			filter: { fileAbsolutePath: { regex: "/content/" } }
-		) {
-			edges {
-				node {
-					...AboutFragment
-				}
-			}
+		markdownRemark(id: { regex: "/pages/index.md/" }) {
+			...AboutFragment
+			...ServicesFragment
+			...HeroFragment
 		}
 	}
 `

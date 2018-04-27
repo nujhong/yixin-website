@@ -8,6 +8,17 @@ import Animation from '../Animation'
 import MdUnfoldMore from 'react-icons/lib/md/unfold-more'
 import MdUnfoldLess from 'react-icons/lib/md/unfold-less'
 
+const ViewButton = ({ node, handleClick, isToggled }) => (
+	<a
+		className="button is-white is-radiusless is-outlined"
+		href="#具体项目"
+		aria-label="查看更多"
+		onClick={() => handleClick(node)}
+	>
+		{isToggled ? <MdUnfoldLess /> : <MdUnfoldMore />}查看详情
+	</a>
+)
+
 class Services extends Component {
 	constructor(props) {
 		super(props)
@@ -16,10 +27,7 @@ class Services extends Component {
 				0: false,
 				1: false,
 			},
-			items: _.flatMap(
-				props.data.edges,
-				edge => edge.node.frontmatter.services
-			),
+			items: _.flatMap(props.data.edges, edge => edge.node.frontmatter),
 		}
 	}
 
@@ -33,49 +41,35 @@ class Services extends Component {
 	}
 
 	render() {
-		console.log(_.mapKeys(this.props.data.edges, ({ node }, k) => node.id))
-		// console.log(
-		// 	_.get(this.props.data.edges[0], ['node', 'frontmatter', 'services'])
-		// )
-		const { edges: categories } = this.props.data
+		const {
+			frontmatter: { Services_title, categories },
+		} = this.props
+
 		return (
 			<div>
 				<div className="section has-background-white-bis">
 					<div className="container">
-						<div className="title is-2 has-text-centered">我们的服务范围</div>
+						<div className="title is-2 has-text-centered">{Services_title}</div>
 						<Columns>
-							{categories.map(({ node }, index) => (
-								<Column
-									isSize="1/2"
-									key={node.id}
-									id={node.frontmatter.category}
-								>
+							{categories.map(({ name, image, tags }) => (
+								<Column isSize="1/2" key={name} id={name}>
 									<Animation className="wow fadeIn" data-wow-offset="10">
-										<Figure
-											alt=""
-											src="https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-										>
+										<Figure alt={name} src={image}>
 											<Block hasTextAlign="centered">
-												<div className="title has-text-white">
-													{node.frontmatter.category}
-												</div>
+												<div className="title has-text-white">{name}</div>
 												<nav
 													className="breadcrumb is-medium"
 													aria-label="breadcrumbs"
 												>
 													<ul>
-														{node.frontmatter.tags.map(tag => (
+														{tags.map(tag => (
 															<li key={tag} className="breadcrumb-item">
 																<a className="has-text-white">{tag}</a>
 															</li>
 														))}
 													</ul>
 												</nav>
-												<ViewButton
-													node={node}
-													isToggled={this.state.isToggled[index]}
-													handleClick={() => this.handleClick(index)}
-												/>
+												<ViewButton />
 											</Block>
 										</Figure>
 									</Animation>
@@ -95,15 +89,17 @@ class Services extends Component {
 	}
 }
 
-const ViewButton = ({ node, handleClick, isToggled }) => (
-	<a
-		className="button is-white is-radiusless is-outlined"
-		href="#具体项目"
-		aria-label="查看更多"
-		onClick={() => handleClick(node)}
-	>
-		{isToggled ? <MdUnfoldLess /> : <MdUnfoldMore />}查看详情
-	</a>
-)
-
 export default Services
+
+export const query = graphql`
+	fragment ServicesFragment on MarkdownRemark {
+		frontmatter {
+			Services_title
+			categories {
+				image
+				name
+				tags
+			}
+		}
+	}
+`

@@ -1,6 +1,6 @@
 import CMS from 'netlify-cms'
 
-// import ServiceListPreview from './preview-templates/ServiceListPreview.js'
-//
-// CMS.registerPreviewStyle("./styles.css")
-// CMS.registerPreviewTemplate("indoor_services", ServiceListPreview)
+import PagePreview from './preview-templates/PagePreview'
+
+CMS.registerPreviewStyle('/styles.css')
+CMS.registerPreviewTemplate('landing_page', PagePreview)

@@ -27,6 +27,7 @@ const RaisedCard = styled(Card)`
 
 const ServicesList = ({ items }) => (
 	<Columns isMultiline>
+		{console.log(items)}
 		<Transition
 			from={{ opacity: 0 }}
 			to={{ opacity: 1 }}
