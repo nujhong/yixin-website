@@ -8,21 +8,19 @@ import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import { Container, Section, Hero, HeroBody } from 'bloomer'
 
-const IndexPage = ({ data: { services, contents } }) => {
-	return (
-		<div>
-			<Header />
-			<HeroSection />
-			<Section>
-				<Container>
-					<About data={contents.edges[0].node.frontmatter} />
-				</Container>
-			</Section>
-			<Services data={services} />
-			<Footer />
-		</div>
-	)
-}
+const IndexPage = ({ data: { contents, services } }) => (
+	<div>
+		<Header />
+		<HeroSection />
+		<Section>
+			<Container>
+				<About data={contents.edges[1].node.frontmatter} />
+			</Container>
+		</Section>
+		<Services data={services} />
+		<Footer />
+	</div>
+)
 
 export default IndexPage
 

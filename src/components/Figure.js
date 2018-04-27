@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'react-emotion'
 
 const StyledFigure = props => {
 	return props.isHoverable ? (
@@ -38,7 +38,7 @@ const FigCaption = styled.figcaption`
 	background: rgba(0, 0, 0, 0.6);
 `
 
-const HoverableFigure = Figure.extend`
+const HoverableFigure = styled(Figure)`
 	& > img {
 		image-rendering: -webkit-optimize-contrast;
 		image-rendering: crisp-edges;

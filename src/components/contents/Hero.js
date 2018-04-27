@@ -12,7 +12,7 @@ import {
 } from 'bloomer'
 import Block from '../Block'
 import Animation from '../Animation'
-import styled from 'styled-components'
+import styled from 'react-emotion'
 
 const HeroSection = () => (
 	<Hero className="hero is-medium">

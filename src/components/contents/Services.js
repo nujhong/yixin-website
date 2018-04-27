@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import update from 'immutability-helper'
 import { Columns, Column, Content } from 'bloomer'
 import ServicesList from '../ServicesList'
 import Figure from '../Figure'
@@ -13,7 +12,10 @@ class Services extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			isToggled: false,
+			isToggled: {
+				0: false,
+				1: false,
+			},
 			items: _.flatMap(
 				props.data.edges,
 				edge => edge.node.frontmatter.services
@@ -21,11 +23,20 @@ class Services extends Component {
 		}
 	}
 
-	handleClick = node => {
-		console.log(node)
+	handleClick = index => {
+		this.setState(prevState => ({
+			isToggled: {
+				...prevState.isToggled,
+				[index]: !prevState.isToggled[index],
+			},
+		}))
 	}
 
 	render() {
+		console.log(_.mapKeys(this.props.data.edges, ({ node }, k) => node.id))
+		// console.log(
+		// 	_.get(this.props.data.edges[0], ['node', 'frontmatter', 'services'])
+		// )
 		const { edges: categories } = this.props.data
 		return (
 			<div>
@@ -33,7 +44,7 @@ class Services extends Component {
 					<div className="container">
 						<div className="title is-2 has-text-centered">我们的服务范围</div>
 						<Columns>
-							{categories.map(({ node }) => (
+							{categories.map(({ node }, index) => (
 								<Column
 									isSize="1/2"
 									key={node.id}
@@ -62,8 +73,8 @@ class Services extends Component {
 												</nav>
 												<ViewButton
 													node={node}
-													isToggled={this.state.isToggled}
-													handleClick={this.handleClick}
+													isToggled={this.state.isToggled[index]}
+													handleClick={() => this.handleClick(index)}
 												/>
 											</Block>
 										</Figure>

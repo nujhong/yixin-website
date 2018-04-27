@@ -10,7 +10,7 @@ import {
 	Column,
 	Title,
 } from 'bloomer'
-import styled from 'styled-components'
+import styled from 'react-emotion'
 import { Transition, config } from 'react-spring'
 import Figure from './Figure'
 import Block from './Block'

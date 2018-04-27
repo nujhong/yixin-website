@@ -6,16 +6,15 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - label: "主页"
-    name: "index"
+  - label: "Page"
+    name: "page"
     delete: false
-    editor:
-      preview: false
     files:
       - label: "着陆页"
-        name: "hero"
-        file: "src/data/content/hero.md"
+        name: "landing_page"
+        file: "src/pages/index.md"
         fields:
+          # Section - Hero
           - {label: "宣传语", name: "tagline"}
           - {label: "价值主张", name: "value_proposition", widget: "text"}
           - label: "Call To Action (行为召唤)"
@@ -23,12 +22,9 @@ collections:
             widget: "list"
             fields:
               - {label: "文字", name: "text"}
-              - {label: "类型", name: "type", widget: "select", options: ["页内导航", "导出链接"]}
+              - {label: "类型", name: "type", widget: "select", options: ["页内导航", "站内导航"]}
               - {label: "链接目的地", name: "target"}
-      - label: "关于我们"
-        name: "about"
-        file: "src/data/content/about.md"
-        fields:
+          # Section - About Us
           - {label: "标题", name: "title"}
           - {label: "描述", name: "summary", widget: "text"}
           - label: "专栏"
@@ -38,34 +34,22 @@ collections:
               - {label: "标题", name: "title"}
               - {label: "内容", name: "text", widget: "text"}
               - {label: "图标", name: "image", widget: "image"}
+          # Section - services
+          - {label: "标题", name: "title", required: false}
+          - label: "业务范围"
+            name: "categories"
+            widget: "object"
+            fields:
+              - {label: "名称", name: "name"}
+              - {label: "图片", name: "image", widget: "image"}
+              - {label: "标签", name: "tags", widget: "list"}
 
-  - label: "业务"
-    name: "services"
-    delete: false
-    files:
-      - label: "室内业务"
-        name: "indoor_services"
-        file: "src/data/services/indoor.md"
-        fields:
-          - {label: "类别", name: "category"}
-          - {label: "标签", name: "tags", widget: "list"}
-          - label: "项目"
-            name: "services"
-            widget: "list"
-            fields:
-              - {label: "名称", name: "title", widget: "string"}
-              - {label: "图片", name: "image", widget: "image"}
-              - {label: "子项目", name: "sub_items", widget: "list", required: "false"}
-      - label: "屋外业务"
-        name: "outdoor_services"
-        file: "src/data/services/outdoor.md"
-        fields:
-          - {label: "类别", name: "category"}
-          - {label: "标签", name: "tags", widget: "list"}
-          - label: "项目"
-            name: "services"
-            widget: "list"
-            fields:
-              - {label: "名称", name: "title", widget: "string"}
-              - {label: "图片", name: "image", widget: "image"}
-              - {name: "sub_items",label: "子项目",  widget: "list", required: "false"}
+  - label: "项目"
+    name: "service"
+    create: true
+    folder: "src/data/services"
+    fields:
+      - {label: "名称", name: "title", widget: "string"}
+      - {label: "图片", name: "image", widget: "image"}
+      - {label: "子项目", name: "sub_items", widget: "list", required: "false"}
+      - {label: "类别", name: "category", widget: "relation", collection: "page", searchFields: "categories", valueField: "categories"}

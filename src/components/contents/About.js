@@ -9,7 +9,7 @@ import {
 	Content,
 	Title,
 } from 'bloomer'
-import styled from 'styled-components'
+import styled from 'react-emotion'
 import Table from '../Table'
 import Animation from '../Animation'
 
@@ -21,7 +21,7 @@ export default ({ data: { title, summary, columns } }) => (
 				<p className="is-size-3">{summary}</p>
 			</div>
 			<div className="columns">
-				{columns.map(({ title, text, image, credit }, i, { length }) => (
+				{columns.map(({ title, text, image, thumbnail }, i, { length }) => (
 					<div className="column">
 						<div className="content has-text-centered">
 							<figure className="image is-192x192 is-centered">
