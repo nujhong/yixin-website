@@ -1,44 +1,26 @@
 import React from 'react'
 import styled from 'react-emotion'
 
-const StyledFigure = props => {
-	return props.isHoverable ? (
-		<HoverableFigure className="image is-16by9 is-clipped" {...props}>
-			<img src={props.src} alt={props.alt || ''} />
-			{props.children && (
-				<FigCaption className="is-overlay has-text-white">
-					{props.children}
-				</FigCaption>
-			)}
-		</HoverableFigure>
-	) : (
-		<Figure className="image is-4by3 is-clipped" {...props}>
-			<img src={props.src} alt={props.alt || ''} />
-			{props.children && (
-				<FigCaption className="is-overlay has-text-white">
-					{props.children}
-				</FigCaption>
-			)}
-		</Figure>
-	)
-}
-
-export default StyledFigure
-
-const Figure = styled.figure`
-	cursor: pointer;
-`
-
-const FigCaption = styled.figcaption`
+const FigCaption = styled('figcaption')`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-weight: 700;
 	justify-content: center;
-	background: rgba(0, 0, 0, 0.6);
+	background: ${({ opacity = 0.6 }) => `rgba(0, 0, 0, ${opacity})`};
 `
 
-const HoverableFigure = styled(Figure)`
+const Figure = ({ className, src, alt, isActive, children, opacity }) => (
+	<figure className={className}>
+		<img src={src} alt={alt} />
+		<FigCaption className="is-overlay has-text-white" opacity={opacity}>
+			{children}
+		</FigCaption>
+	</figure>
+)
+
+export const HoverableFigure = styled(Figure)`
+	cursor: pointer;
 	& > img {
 		image-rendering: -webkit-optimize-contrast;
 		image-rendering: crisp-edges;
@@ -58,3 +40,5 @@ const HoverableFigure = styled(Figure)`
 		opacity: 1;
 	}
 `
+
+export default Figure

@@ -11,7 +11,6 @@ import {
 	Subtitle,
 } from 'bloomer'
 import Block from '../Block'
-import Animation from '../Animation'
 import styled from 'react-emotion'
 
 const Hero = styled.div`

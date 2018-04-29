@@ -38,7 +38,7 @@ export const pageQuery = graphql`
 				}
 			}
 		}
-		markdownRemark(id: { regex: "/pages/index.md/" }) {
+		markdownRemark(id: { regex: "/pages/home/index.md/" }) {
 			...AboutFragment
 			...ServicesFragment
 			...HeroFragment

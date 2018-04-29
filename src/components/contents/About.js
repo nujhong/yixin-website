@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'react-emotion'
 import Table from '../Table'
-import Animation from '../Animation'
 
 const PaddedImg = styled.img`
 	padding: ${props => (props.isLast ? '1rem' : '0')};
