@@ -1,51 +1,55 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import styled from 'react-emotion'
-import { Image } from 'bloomer'
-
-const FileUploader = ({ files, handleDrop }) => (
-	<ThumbnailWrapper>
-		<StyledDropzone multiple accept="image/*" onDrop={handleDrop}>
-			{({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
-				if (isDragActive) {
-					return 'This file is authorized'
-				}
-				if (isDragReject) {
-					return 'This file is not authorized'
-				}
-			}}
-		</StyledDropzone>
-		{files.map(file => <Thumbnail isSize="128x128" src={file.preview} />)}
-	</ThumbnailWrapper>
-)
-
-export default FileUploader
-
+import MdLinkedCamera from 'react-icons/lib/md/linked-camera'
 const StyledDropzone = styled(Dropzone)`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 	width: 128px;
 	height: 128px;
-	margin: 1px;
-	@media (min-width: 769px) {
-		margin: 5px;
-	}
+	margin: 5px;
 	border-width: 1px;
-	border-color: rgb(102, 102, 102);
 	border-style: dashed;
 	border-radius: 5px;
 `
 
-const Thumbnail = styled(Image)`
+const Thumbnail = styled(`figure`)`
 	display: inline-flex;
-	margin: 1px;
-	@media (min-width: 769px) {
-		margin: 5px;
+	margin: 5px;
+	border-width: 1px;
+	border-style: transparent;
+	& > img {
+		object-fit: contain;
 	}
 `
 const ThumbnailWrapper = styled(`div`)`
 	display: flex;
 	flex-flow: row wrap;
-	padding: 1px;
-	@media (min-width: 769px) {
-		padding: 5px;
-	}
 `
+const DeleteButton = styled(`button`)`
+	position: absolute;
+	top: 0;
+	right: 0;
+`
+
+const FileUploader = ({ files, handleDrop, handleDelete }) => (
+	<ThumbnailWrapper>
+		<StyledDropzone multiple accept="image/*" onDrop={handleDrop}>
+			<MdLinkedCamera size={36} />
+			<p>拍摄/上传图片</p>
+		</StyledDropzone>
+		{files.map(({ preview }, index) => (
+			<Thumbnail className="image is-128x128">
+				<img src={preview} />
+				<DeleteButton
+					className="delete is-small"
+					onClick={e => handleDelete(index, e)}
+				/>
+			</Thumbnail>
+		))}
+	</ThumbnailWrapper>
+)
+
+export default FileUploader
