@@ -28,4 +28,4 @@ npm run develop
 ## Roadmap
 
 * [ ] Animation (with React Spring)
-* [ ] Replace image string with ImageSharp node
+* [ ] Netlify CMS uploaded images with Gatsby image processing

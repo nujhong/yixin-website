@@ -24,9 +24,7 @@ export default ({
 								{console.log(image)}
 								<div className="content has-text-centered">
 									<figure className="image is-192x192 is-centered">
-										{image.childImageSharp && (
-											<Img sizes={image.childImageSharp.sizes} />
-										)}
+										<PaddedImg src={image} alt={heading} />
 									</figure>
 									<h2 className="title is-4">{heading}</h2>
 									<p>{paragraph}</p>
@@ -48,13 +46,7 @@ export const query = graphql`
 			columns {
 				heading
 				paragraph
-				image {
-					childImageSharp {
-						sizes(maxWidth: 1240) {
-							...GatsbyImageSharpSizes
-						}
-					}
-				}
+				image
 			}
 		}
 	}
