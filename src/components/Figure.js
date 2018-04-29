@@ -24,17 +24,19 @@ export const HoverableFigure = styled(Figure)`
 	& > img {
 		image-rendering: -webkit-optimize-contrast;
 		image-rendering: crisp-edges;
-		transform: scale(1);
+		transform: ${props => (props.isActive ? 'scale(1.2)' : 'scale(1)')};
 		transition: 0.7s ease-in-out;
 	}
 	& > figcaption {
-		background: transparent;
 		transition: 0.3s ease-in-out;
-		opacity: 0;
+		background: ${props =>
+			props.isActive ? 'rgba(0, 0, 0, 0.6)' : 'transparent'};
+		opacity: ${props => (props.isActive ? '1' : '0')};
 	}
 	&:hover > img {
 		transform: scale(1.2);
 	}
+
 	&:hover > figcaption {
 		background: rgba(0, 0, 0, 0.6);
 		opacity: 1;
