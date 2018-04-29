@@ -12,16 +12,20 @@ import {
 } from 'bloomer'
 import Block from '../Block'
 import styled from 'react-emotion'
+import Img from 'gatsby-image'
 
 const Hero = styled.div`
-	background: url('https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')
+	${'' /* background: url('https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')
 		center center no-repeat;
-	background-size: cover;
+	background-size: cover; */};
 `
 
-const HeroSection = ({ frontmatter: { tagline, value_proposition } }) => (
+const HeroSection = ({
+	frontmatter: { tagline, value_proposition, background_image },
+}) => (
 	<Hero className="hero is-medium">
 		<div className="hero-body">
+			<Img resolutions={background_image.childImageSharp.resolutions} />
 			<div className="container has-text-centered">
 				<div className="block">
 					<h1 className="title is-1 is-spaced">{tagline}</h1>
@@ -53,6 +57,13 @@ export const query = graphql`
 		frontmatter {
 			tagline
 			value_proposition
+			background_image {
+				childImageSharp {
+					resolutions {
+						...GatsbyImageSharpResolutions
+					}
+				}
+			}
 		}
 	}
 `

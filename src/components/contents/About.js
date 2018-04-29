@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'react-emotion'
 import Table from '../Table'
+import Img from 'gatsby-image'
 
 const PaddedImg = styled.img`
 	padding: ${props => (props.isLast ? '1rem' : '0')};
@@ -20,9 +21,12 @@ export default ({
 					<div className="columns">
 						{columns.map(({ heading, paragraph, image }) => (
 							<div className="column">
+								{console.log(image)}
 								<div className="content has-text-centered">
 									<figure className="image is-192x192 is-centered">
-										<PaddedImg src={image} />
+										{image.childImageSharp && (
+											<Img sizes={image.childImageSharp.sizes} />
+										)}
 									</figure>
 									<h2 className="title is-4">{heading}</h2>
 									<p>{paragraph}</p>
@@ -44,7 +48,13 @@ export const query = graphql`
 			columns {
 				heading
 				paragraph
-				image
+				image {
+					childImageSharp {
+						sizes(maxWidth: 1240) {
+							...GatsbyImageSharpSizes
+						}
+					}
+				}
 			}
 		}
 	}
