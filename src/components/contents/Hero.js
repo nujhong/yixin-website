@@ -1,15 +1,5 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import {
-	Columns,
-	Column,
-	Button,
-	HeroHeader,
-	HeroBody,
-	Container,
-	Title,
-	Subtitle,
-} from 'bloomer'
 import Block from '../Block'
 import styled from 'react-emotion'
 import Img from 'gatsby-image'
