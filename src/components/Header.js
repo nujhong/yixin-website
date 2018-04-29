@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Headroom from 'react-headroom'
 import Link from 'gatsby-link'
 import ChevronRight from 'react-icons/lib/md/chevron-right'
-
+import logo from '../img/logo.png'
 import {
 	Container,
 	Navbar,
@@ -32,7 +32,7 @@ class Header extends Component {
 					<Container>
 						<NavbarBrand>
 							<Link to="/" className="navbar-item">
-								易信
+								<img src={logo} alt="易信" height="60" />易信房屋装修
 							</Link>
 							<NavbarBurger
 								isActive={this.state.isActive}
