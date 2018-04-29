@@ -16,7 +16,9 @@ export default ({
 	},
 }) => (
 	<div>
-		<Helmet title={title} />
+		<Helmet title={title}>
+			<html lang="zh" amp />
+		</Helmet>
 		<div>{children()}</div>
 	</div>
 )
