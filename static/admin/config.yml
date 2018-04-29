@@ -12,12 +12,12 @@ collections:
     files:
       - label: "着陆页"
         name: "landing_page"
-        file: "src/pages/index.md"
+        file: "src/pages/home/index.md"
         fields:
           # Section - Hero
           - {label: "宣传语", name: "tagline"}
           - {label: "价值主张", name: "value_proposition", widget: "text"}
-
+          - {label: "背景图片", name: "background_image", widget: "image"}
           # CTA
           # - label: "Call To Action (行为召唤)"
           #   name: "cta"

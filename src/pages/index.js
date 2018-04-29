@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import Link from 'gatsby-link'
+import React from 'react'
 import Header from '../components/Header'
 import Hero from '../components/contents/Hero'
 import About from '../components/contents/About'
 import Services from '../components/contents/Services'
-import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
-import { Container, Section, HeroBody } from 'bloomer'
 
 const IndexPage = ({
 	data: {
@@ -17,11 +14,7 @@ const IndexPage = ({
 	<div>
 		<Header />
 		<Hero frontmatter={frontmatter} />
-		<Section>
-			<Container>
-				<About frontmatter={frontmatter} />
-			</Container>
-		</Section>
+		<About frontmatter={frontmatter} />
 		<Services frontmatter={frontmatter} data={data} />
 		<Footer />
 	</div>
@@ -45,7 +38,7 @@ export const pageQuery = graphql`
 				}
 			}
 		}
-		markdownRemark(id: { regex: "/pages/index.md/" }) {
+		markdownRemark(id: { regex: "/pages/home/index.md/" }) {
 			...AboutFragment
 			...ServicesFragment
 			...HeroFragment
