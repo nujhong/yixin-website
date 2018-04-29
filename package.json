@@ -31,7 +31,8 @@
 		"react-icons": "^2.2.7",
 		"react-spring": "^4.2.1",
 		"react-transition-group": "^2.3.1",
-		"smooth-scroll": "^12.1.5"
+		"smooth-scroll": "^12.1.5",
+		"uuid": "^3.2.1"
 	},
 	"keywords": [
 		"gatsby"
