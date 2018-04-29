@@ -44,10 +44,10 @@ class Header extends Component {
 							onClick={this.handleToggle}
 						>
 							<NavbarEnd>
-								<a href="#室内" aria-label="室内装修" className="navbar-item">
+								<a href="/#室内" aria-label="室内装修" className="navbar-item">
 									室内装修
 								</a>
-								<a href="#户外" aria-label="户外装修" className="navbar-item">
+								<a href="/#户外" aria-label="户外装修" className="navbar-item">
 									户外装修
 								</a>
 								<Link to="/contact" className="navbar-item">
