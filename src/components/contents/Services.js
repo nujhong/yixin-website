@@ -6,10 +6,17 @@ import Figure from '../Figure'
 import Block from '../Block'
 import MdUnfoldMore from 'react-icons/lib/md/unfold-more'
 import MdUnfoldLess from 'react-icons/lib/md/unfold-less'
+import classNames from 'classnames'
 
 const ViewButton = ({ category, handleClick, isToggled }) => (
 	<a
-		className="button is-white is-radiusless is-outlined"
+		className={classNames(
+			'button',
+			'is-white',
+			'is-radiusless',
+			{ 'is-outlined': !isToggled },
+			{ 'is-hovered': isToggled }
+		)}
 		href="#具体项目"
 		aria-label="查看更多"
 		onClick={handleClick}

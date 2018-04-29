@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'react-emotion'
 import { HoverableFigure } from './Figure'
+import MdDone from 'react-icons/lib/md/done'
 
 const RaisedCard = styled('div')`
 	transition-duration: 86ms;
@@ -28,7 +29,12 @@ const ServiceItem = ({ item: { title, image, sub_items, isActive } }) => (
 				className="image is-16by9 is-clipped"
 				isActive={isActive}
 			>
-				{sub_items.map(i => <span key={i}>{i}</span>)}
+				{sub_items.map(i => (
+					<span key={i}>
+						<MdDone style={{ marginRight: '0.5em' }} />
+						{i}
+					</span>
+				))}
 			</HoverableFigure>
 		</div>
 		<div className="card-footer">

@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import Block from '../Block'
 import styled from 'react-emotion'
 import Img from 'gatsby-image'
+import logo from '../../img/logo.png'
 
 const Hero = styled.div`
 	background: ${props => `url(${props.background}) center center no-repeat`};
