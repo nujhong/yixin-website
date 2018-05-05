@@ -11,8 +11,10 @@ class ContactForm extends Component {
 		this.state = {
 			attachments: [],
 			name: '',
+			email: '',
+			description: '',
 			isSubmitting: false,
-			operationId: uuidv4(),
+			url: `https://cloudinary.com/console/media_library/folders/images/${uuidv4()}`,
 		}
 	}
 
@@ -31,8 +33,10 @@ class ContactForm extends Component {
 		}))
 	}
 
-	handleChange = e => {
-		this.setState({ name: e.target.value })
+	handleInputChange = ({ target: { value, name } }) => {
+		this.setState({
+			[name]: value,
+		})
 	}
 
 	handleSubmit = e => {
@@ -58,16 +62,37 @@ class ContactForm extends Component {
 				.then(response => response.data)
 		})
 
+		const submitData = _.pick(this.state, [
+			'name',
+			'email',
+			'description',
+			'url',
+		])
+
 		axios.all(uploaders).then(data => {
-			console.log(data)
-			navigateTo('/success')
+			axios
+				.post(
+					'/',
+					{
+						'form-name': 'contact',
+						...submitData,
+					},
+					{
+						headers: { 'X-Requested-With': 'XMLHttpRequest' },
+					}
+				)
+				.then(() => navigateTo('/success'))
 		})
 	}
 
 	render() {
 		const { name, attachments, isSubmitting, operationId } = this.state
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form
+				onSubmit={this.handleSubmit}
+				data-netlify="true"
+				data-netlify-honeypot="bot-field"
+			>
 				<div className="field is-horizontal">
 					<div className="field-label is-normal">
 						<label className="label">名字</label>
@@ -78,9 +103,10 @@ class ContactForm extends Component {
 								<input
 									className="input"
 									type="text"
+									name="name"
 									placeholder="我们对您的称呼"
 									value={this.state.name}
-									onChange={this.handleChange}
+									onChange={this.handleInputChange}
 								/>
 							</div>
 						</div>
@@ -97,6 +123,9 @@ class ContactForm extends Component {
 								<input
 									className="input"
 									type="email"
+									name="email"
+									value={this.state.email}
+									onChange={this.handleInputChange}
 									placeholder="可通过微信联系我们或者留下您的邮箱/电话号码"
 								/>
 							</div>
@@ -114,6 +143,9 @@ class ContactForm extends Component {
 								<textarea
 									className="textarea"
 									type="text"
+									name="description"
+									value={this.state.description}
+									onChange={this.handleInputChange}
 									placeholder="具体描述，材料，面积等要求"
 								/>
 							</div>
@@ -154,14 +186,6 @@ class ContactForm extends Component {
 						</div>
 					</div>
 				</div>
-				<input
-					type="hidden"
-					name="url"
-					value={
-						`https://cloudinary.com/console/media_library/folders/images/` +
-						this.state.operationId
-					}
-				/>
 			</form>
 		)
 	}

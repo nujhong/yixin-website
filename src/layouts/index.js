@@ -11,13 +11,14 @@ export default ({
 	children,
 	data: {
 		site: {
-			siteMetadata: { title },
+			siteMetadata: { title, content },
 		},
 	},
 }) => (
 	<div>
 		<Helmet title={title}>
 			<html lang="zh" amp />
+			<meta name="description" content={content} />
 		</Helmet>
 		<div>{children()}</div>
 	</div>
@@ -28,6 +29,7 @@ export const query = graphql`
 		site {
 			siteMetadata {
 				title
+				content
 			}
 		}
 	}
