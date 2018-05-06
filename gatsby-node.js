@@ -16,7 +16,7 @@ exports.onCreateNode = ({ node, getNode, getNodes, boundActionCreators }) => {
 		if (typeof node.frontmatter.thumbnail === 'string') {
 			// Find absolute path of linked path
 			const pathToFile = path
-				.join(__dirname, 'static', node.frontmatter.image)
+				.join(__dirname, 'static', node.frontmatter.thumbnail)
 				.split(path.sep)
 				.join('/')
 
