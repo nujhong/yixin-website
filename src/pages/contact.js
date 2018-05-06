@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import Header from '../components/Header'
 import ContactForm from '../components/ContactForm'
-import Footer from '../components/Footer'
 import styled from 'react-emotion'
 
 class ContactPage extends Component {
@@ -21,7 +20,7 @@ class ContactPage extends Component {
 				<div className="message-header">
 					<p />
 					<button
-						class="delete"
+						className="delete"
 						aria-label="delete"
 						onClick={this.handleClose}
 					/>
@@ -51,7 +50,6 @@ class ContactPage extends Component {
 						</div>
 					</div>
 				</div>
-				<Footer />
 			</div>
 		)
 	}

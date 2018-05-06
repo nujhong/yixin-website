@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import Block from '../Block'
 import styled from 'react-emotion'
 import Img from 'gatsby-image'
 import logo from '../../img/logo.png'
@@ -20,7 +19,7 @@ const HeroSection = ({
 					<h1 className="title is-1 is-spaced">{tagline}</h1>
 					<p className="subtitle">{value_proposition}</p>
 				</div>
-				<div className="hero-buttons">
+				<div className="hero-buttons" style={{ justifyContent: 'center' }}>
 					<Link
 						to="/contact"
 						className="button is-primary is-large is-radiusless"

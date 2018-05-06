@@ -1,27 +1,25 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { Columns, Column, Content } from 'bloomer'
+import Img from 'gatsby-image'
 import ServiceList from '../ServiceList'
 import Figure from '../Figure'
-import Block from '../Block'
 import MdUnfoldMore from 'react-icons/lib/md/unfold-more'
 import MdUnfoldLess from 'react-icons/lib/md/unfold-less'
 import classNames from 'classnames'
 
-const ViewButton = ({ category, handleClick, isToggled }) => (
+const ViewButton = ({ category, handleClick, isFiltered }) => (
 	<a
 		className={classNames(
 			'button',
 			'is-white',
 			'is-radiusless',
-			{ 'is-outlined': !isToggled },
-			{ 'is-hovered': isToggled }
+			isFiltered ? 'is-hovered' : 'is-outlined'
 		)}
 		href="#具体项目"
 		aria-label="查看更多"
 		onClick={handleClick}
 	>
-		{isToggled ? <MdUnfoldLess /> : <MdUnfoldMore />}查看详情
+		{isFiltered ? <MdUnfoldLess /> : <MdUnfoldMore />}查看详情
 	</a>
 )
 
@@ -31,56 +29,63 @@ const initialState = { 0: false, 1: false }
 class Services extends Component {
 	constructor(props) {
 		super(props)
-		this.id = _.times(props.data.edges.length, _.uniqueId)
+		this.items = _.flatMap(props.data.edges)
+
 		this.state = {
-			isToggled: initialState,
-			items: _.flatMap(props.data.edges, edge => edge.node.frontmatter),
+			filters: initialState,
+			items: this.items,
 		}
 	}
 
-	handleClick = index => {
+	handleFilter = index => {
 		this.setState(prevState => {
-			let isToggled = {
+			let filters = {
 				...initialState,
-				[index]: prevState.isToggled[index] ? false : true,
+				[index]: prevState.filters[index] ? false : true,
 			}
 			return {
-				isToggled,
-				items: _.reduce(
-					prevState.items,
-					(result, value, key) => {
-						result.push({
-							...value,
-							isActive: isToggled[value.category],
-						})
-						return result
-					},
-					[]
+				filters,
+				items: _.filter(
+					this.items,
+					item => filters[item.node.frontmatter.category]
 				),
 			}
 		})
 	}
 
+	handleClear = () => {
+		this.setState({
+			filters: initialState,
+			items: this.items,
+		})
+	}
+
+	handleClick = index => {
+		this.state.filters[index] ? this.handleClear() : this.handleFilter(index)
+	}
+
 	render() {
+		const { items, filters } = this.state
 		const {
 			frontmatter: { Services_title, categories },
 		} = this.props
 
+		const isFiltered = _.find(filters, category => category === true)
 		return (
 			<div>
 				<div className="section has-background-white-bis">
 					<div className="container">
 						<div className="title is-2 has-text-centered">{Services_title}</div>
-						<Columns>
+						<div className="columns">
 							{categories.map(({ name, image, tags }, index) => (
-								<Column isSize="1/2" key={name} id={name}>
+								<div className="column is-half" key={name} id={name}>
 									<Figure
 										alt={name}
 										src={image}
 										className="image is-4by3"
 										isActive
 									>
-										<div className="title has-text-white">{name}</div>
+										<h2 className="title has-text-white">{name}</h2>
 										<nav
 											className="breadcrumb is-medium"
 											aria-label="breadcrumbs"
@@ -94,19 +99,19 @@ class Services extends Component {
 											</ul>
 										</nav>
 										<ViewButton
-											isToggled={this.state.isToggled[index]}
+											isFiltered={filters[index]}
 											handleClick={() => this.handleClick(index)}
 										/>
 									</Figure>
-								</Column>
+								</div>
 							))}
-						</Columns>
+						</div>
 					</div>
 				</div>
 
 				<div id="具体项目" className="section has-background-light">
 					<div className="container">
-						<ServiceList items={this.state.items} />
+						<ServiceList items={items} isFiltered={isFiltered} />
 					</div>
 				</div>
 			</div>

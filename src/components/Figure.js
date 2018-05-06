@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'react-emotion'
+import Img from 'gatsby-image'
 
 const FigCaption = styled('figcaption')`
 	display: flex;
@@ -10,14 +11,33 @@ const FigCaption = styled('figcaption')`
 	background: ${({ opacity = 0.6 }) => `rgba(0, 0, 0, ${opacity})`};
 `
 
-const Figure = ({ className, src, alt, isActive, children, opacity }) => (
-	<figure className={className}>
-		<img src={src} alt={alt} />
-		<FigCaption className="is-overlay has-text-white" opacity={opacity}>
-			{children}
-		</FigCaption>
-	</figure>
-)
+const Figure = ({
+	className,
+	src,
+	sizes,
+	resolutions,
+	alt,
+	isActive,
+	children,
+	opacity,
+}) => {
+	var Image
+	if (sizes) {
+		Image = <Img sizes={sizes} alt={alt} />
+	} else if (resolutions) {
+		Image = <Img resolutions={resolutions} alt={alt} />
+	} else {
+		Image = <img src={src} alt={alt} />
+	}
+	return (
+		<figure className={className}>
+			{Image}
+			<FigCaption className="is-overlay has-text-white" opacity={opacity}>
+				{children}
+			</FigCaption>
+		</figure>
+	)
+}
 
 export const HoverableFigure = styled(Figure)`
 	cursor: pointer;

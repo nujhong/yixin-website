@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'react-emotion'
+import Img from 'gatsby-image'
 import { HoverableFigure } from './Figure'
 import MdDone from 'react-icons/lib/md/done'
 
@@ -20,27 +21,40 @@ const RaisedCard = styled('div')`
 	}
 `
 
-const ServiceItem = ({ item: { title, image, sub_items, isActive } }) => (
-	<RaisedCard className="card" isActive={isActive}>
-		<div className="card-image">
-			<HoverableFigure
-				src={image}
-				alt={title}
-				className="image is-16by9 is-clipped"
-				isActive={isActive}
-			>
-				{sub_items.map(i => (
-					<span key={i}>
-						<MdDone style={{ marginRight: '0.5em' }} />
-						{i}
-					</span>
-				))}
-			</HoverableFigure>
-		</div>
-		<div className="card-footer">
-			<div className="card-footer-item">{title}</div>
-		</div>
-	</RaisedCard>
-)
+const ServiceItem = props => {
+	const {
+		item: {
+			node: {
+				frontmatter: { title, sub_items, image, category },
+				childImageSharp: { sizes },
+			},
+		},
+		isActive,
+	} = props
+	return (
+		<RaisedCard className="card">
+			<div className="card-image">
+				<HoverableFigure
+					alt={title}
+					sizes={sizes}
+					className="image"
+					isActive={isActive}
+				>
+					{sub_items.map(i => (
+						<span key={i}>
+							<MdDone style={{ marginRight: '0.5em' }} />
+							{i}
+						</span>
+					))}
+				</HoverableFigure>
+			</div>
+			<div className="card-footer">
+				<div className="card-footer-item">
+					<h3>{title}</h3>
+				</div>
+			</div>
+		</RaisedCard>
+	)
+}
 
 export default ServiceItem

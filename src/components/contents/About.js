@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'react-emotion'
-import Table from '../Table'
 import Img from 'gatsby-image'
 
 const PaddedImg = styled.img`
@@ -21,7 +20,6 @@ export default ({
 					<div className="columns">
 						{columns.map(({ heading, paragraph, image }) => (
 							<div className="column">
-								{console.log(image)}
 								<div className="content has-text-centered">
 									<figure className="image is-192x192 is-centered">
 										<PaddedImg src={image} alt={heading} />

@@ -1,9 +1,11 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import axios from 'axios'
 import FileUploader from './FileUploader'
 import { navigateTo } from 'gatsby-link'
-import { Progress } from 'bloomer'
+import classNames from 'classnames'
 import uuidv4 from 'uuid/v4'
+import Field from './Field'
 
 class ContactForm extends Component {
 	constructor(props) {
@@ -13,7 +15,7 @@ class ContactForm extends Component {
 			name: '',
 			email: '',
 			description: '',
-			isSubmitting: false,
+			isLoading: false,
 			url: `https://cloudinary.com/console/media_library/folders/images/${uuidv4()}`,
 		}
 	}
@@ -41,8 +43,8 @@ class ContactForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
+		this.setState({ isLoading: true })
 
-		this.setState({ isSubmitting: true })
 		const uploaders = this.state.attachments.map(file => {
 			const formData = new FormData()
 			formData.append('file', file)
@@ -51,15 +53,14 @@ class ContactForm extends Component {
 			formData.append('folder', this.state.operationId)
 			formData.append('api_key', '958773721551147')
 			formData.append('timestamp', (Date.now() / 1000) | 0)
-			return axios
-				.post(
-					'https://api.cloudinary.com/v1_1/dx2sdr8wg/image/upload',
-					formData,
-					{
-						headers: { 'X-Requested-With': 'XMLHttpRequest' },
-					}
-				)
-				.then(response => response.data)
+			return axios({
+				method: 'post',
+				url: 'https://api.cloudinary.com/v1_1/dx2sdr8wg/image/upload',
+				data: formData,
+				config: {
+					headers: { 'X-Requested-With': 'XMLHttpRequest' },
+				},
+			}).then(response => response.data)
 		})
 
 		const submitData = _.pick(this.state, [
@@ -70,122 +71,90 @@ class ContactForm extends Component {
 		])
 
 		axios.all(uploaders).then(data => {
-			axios
-				.post(
-					'/',
-					{
-						'form-name': 'contact',
-						...submitData,
-					},
-					{
-						headers: { 'X-Requested-With': 'XMLHttpRequest' },
-					}
-				)
-				.then(() => navigateTo('/success'))
+			console.log(data)
+			axios({
+				method: 'post',
+				url: '/',
+				data: {
+					'form-name': 'contact',
+					...submitData,
+				},
+				config: { headers: { 'X-Requested-With': 'XMLHttpRequest' } },
+			}).then(() => navigateTo('/success'))
 		})
 	}
 
 	render() {
-		const { name, attachments, isSubmitting, operationId } = this.state
+		const {
+			name,
+			email,
+			description,
+			attachments,
+			isLoading,
+			operationId,
+		} = this.state
+
 		return (
 			<form
 				onSubmit={this.handleSubmit}
 				data-netlify="true"
 				data-netlify-honeypot="bot-field"
 			>
-				<div className="field is-horizontal">
-					<div className="field-label is-normal">
-						<label className="label">名字</label>
-					</div>
-					<div className="field-body">
-						<div className="field">
-							<div className="control">
-								<input
-									className="input"
-									type="text"
-									name="name"
-									placeholder="我们对您的称呼"
-									value={this.state.name}
-									onChange={this.handleInputChange}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
+				<Field
+					required
+					label="名字"
+					type="input"
+					field={{
+						placeholder: '我们对您的称呼',
+						name: 'name',
+						type: 'text',
+						value: name,
+						onChange: this.handleInputChange,
+					}}
+				/>
+				<Field
+					required
+					label="联系方式"
+					type="input"
+					field={{
+						placeholder: '可通过微信联系我们或者留下您的邮箱/电话号码',
+						name: 'email',
+						type: 'email',
+						value: email,
+						onChange: this.handleInputChange,
+					}}
+				/>
 
-				<div className="field is-horizontal">
-					<div className="field-label is-normal">
-						<label className="label">联系方式</label>
-					</div>
-					<div className="field-body">
-						<div className="field">
-							<div className="control">
-								<input
-									className="input"
-									type="email"
-									name="email"
-									value={this.state.email}
-									onChange={this.handleInputChange}
-									placeholder="可通过微信联系我们或者留下您的邮箱/电话号码"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
+				<Field
+					label="描述"
+					type="textarea"
+					field={{
+						placeholder: '具体描述，材料，面积等要求',
+						name: 'email',
+						value: description,
+						onChange: this.handleInputChange,
+					}}
+				/>
 
-				<div className="field is-horizontal">
-					<div className="field-label is-normal">
-						<label className="label">描述</label>
-					</div>
-					<div className="field-body">
-						<div className="field">
-							<div className="control">
-								<textarea
-									className="textarea"
-									type="text"
-									name="description"
-									value={this.state.description}
-									onChange={this.handleInputChange}
-									placeholder="具体描述，材料，面积等要求"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
+				<Field
+					label="附件"
+					type="file"
+					field={{
+						handleDelete: this.handleDelete,
+						handleDrop: this.handleDrop,
+						files: attachments,
+					}}
+				/>
 
-				<div className="field is-horizontal">
-					<div className="field-label is-normal">
-						<label className="label">附件</label>
-					</div>
-					<div className="field-body">
-						<div className="field">
-							<div className="control">
-								<FileUploader
-									handleDelete={this.handleDelete}
-									handleDrop={this.handleDrop}
-									files={this.state.attachments}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className="field is-horizontal">
-					<div className="field-label" />
-					<div className="field-body">
-						<div className="field">
-							<div className="control">
-								<button
-									className={`button is-primary is-medium ${
-										isSubmitting ? 'is-loading' : ''
-									}`}
-								>
-									提交
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				<Field label="" type="button">
+					<button
+						className={classNames(`button is-primary is-medium is-radiusless`, {
+							'is-loading': isLoading,
+						})}
+					>
+						提交
+					</button>
+				</Field>
 			</form>
 		)
 	}

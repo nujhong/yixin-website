@@ -6,46 +6,46 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - label: "Pages"
-    name: "pages"
+  - label: "内容"
+    name: "content"
     delete: false
     files:
       - label: "着陆页"
         name: "landing_page"
-        file: "src/pages/home/index.md"
+        file: "src/data/index.md"
         fields:
           # Section - Hero
           - {label: "宣传语", name: "tagline"}
           - {label: "价值主张", name: "value_proposition", widget: "text"}
           - {label: "背景图片", name: "background_image", widget: "image"}
-          # CTA
-          # - label: "Call To Action (行为召唤)"
-          #   name: "cta"
-          #   widget: "list"
-          #   fields:
-          #     - {label: "文字", name: "text"}
-          #     - {label: "类型", name: "type", widget: "select", options: ["页内导航", "站内导航"]}
-          #     - {label: "链接目的地", name: "target"}
 
           # Section - About Us
-          - {label: "关于我们 - 标题", name: "AboutUs_title"}
-          - {label: "关于我们 - 描述", name: "AboutUs_summary", widget: "text"}
-          - label: "专栏"
-            name: "columns"
-            widget: "list"
-            fields:
-              - {label: "标题", name: "heading"}
-              - {label: "段落", name: "paragraph", widget: "text"}
-              - {label: "图片", name: "image", widget: "image"}
+          - {label: "关于我们 - 标题", name: "AboutUs_title", required: false}
+          - {label: "关于我们 - 描述", name: "AboutUs_summary", widget: "text",required: false}
+
           # Section - services
           - {label: "业务范围 - 标题", name: "Services_title", required: false}
-          - label: "业务类型"
-            name: "categories"
-            widget: "list"
-            fields:
-              - {label: "名称", name: "name"}
-              - {label: "图片", name: "image", widget: "image"}
-              - {label: "标签", name: "tags", widget: "list"}
+
+          # Footer
+          - {label: "联系我们", name: "ContactUs", widget: "markdown", required: false}
+
+  - label: "业务类型"
+    name: "categories"
+    create: true
+    folder: "src/data/categories"
+    fields:
+      - {label: "名称", name: "name"}
+      - {label: "图片", name: "thumbnail", widget: "image"}
+      - {label: "标签", name: "tags", widget: "list"}
+
+  - label: "专栏"
+    name: "columns"
+    create: true
+    folder: "src/data/columns"
+    fields:
+      - {label: "标题", name: "heading"}
+      - {label: "段落", name: "paragraph", widget: "text"}
+      - {label: "图片", name: "thumbnail", widget: "image"}
 
   - label: "项目"
     name: "service"
@@ -53,7 +53,7 @@ collections:
     folder: "src/data/services"
     fields:
       - {label: "名称", name: "title", widget: "string"}
-      - {label: "图片", name: "image", widget: "image"}
+      - {label: "图片", name: "thumbnail", widget: "image"}
       - {label: "子项目", name: "sub_items", widget: "list", required: "false"}
       - label: "类别"
         name: "category"

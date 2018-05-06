@@ -1,34 +1,35 @@
 import React from 'react'
-import {
-	Footer,
-	Container,
-	Content,
-	Columns,
-	Column,
-	Icon,
-	Title,
-} from 'bloomer'
+import { StyledHTMLContent } from './Content'
+import styled from 'react-emotion'
 
-const WrappedFooter = () => (
-	<Footer id="footer">
-		<Container>
-			<Content isSize="small">
-				<Columns>
-					<Column isSize="1/3" isOffset={8}>
-						<Title isSize="5">联系我们</Title>
-						<p>0478 706 793</p>
-						<p>ABN</p>
-					</Column>
-				</Columns>
-			</Content>
-			<a
-				className="is-invisible"
-				href="https://www.freepik.com/free-vector/workers-in-uniform_1311330.htm"
-			>
-				Designed by Freepik
-			</a>
-		</Container>
-	</Footer>
+const HiddenCredit = styled('div')`
+	display: none;
+`
+
+export default ({ frontmatter: { ContactUs } }) => (
+	<div className="footer" id="footer">
+		<div className="container">
+			<div className="content is-small">
+				<div className="columns">
+					<div className="column is-one-third is-offset-8">
+						<div className="title is-5">联系我们</div>
+						<StyledHTMLContent content={ContactUs} />
+					</div>
+				</div>
+			</div>
+			<HiddenCredit>
+				<a href="https://www.freepik.com/free-vector/workers-in-uniform_1311330.htm">
+					Designed by Freepik
+				</a>
+			</HiddenCredit>
+		</div>
+	</div>
 )
 
-export default WrappedFooter
+export const query = graphql`
+	fragment FooterFragment on MarkdownRemark {
+		frontmatter {
+			ContactUs
+		}
+	}
+`

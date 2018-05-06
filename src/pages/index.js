@@ -16,7 +16,7 @@ const IndexPage = ({
 		<Hero frontmatter={frontmatter} />
 		<About frontmatter={frontmatter} />
 		<Services frontmatter={frontmatter} data={data} />
-		<Footer />
+		<Footer frontmatter={frontmatter} />
 	</div>
 )
 
@@ -29,11 +29,17 @@ export const pageQuery = graphql`
 		) {
 			edges {
 				node {
+					id
 					frontmatter {
 						title
 						image
 						sub_items
 						category
+					}
+					childImageSharp {
+						sizes(maxWidth: 590, maxHeight: 380) {
+							...GatsbyImageSharpSizes
+						}
 					}
 				}
 			}
@@ -42,6 +48,7 @@ export const pageQuery = graphql`
 			...AboutFragment
 			...ServicesFragment
 			...HeroFragment
+			...FooterFragment
 		}
 	}
 `

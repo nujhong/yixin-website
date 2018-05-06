@@ -3,17 +3,6 @@ import Headroom from 'react-headroom'
 import Link from 'gatsby-link'
 import ChevronRight from 'react-icons/lib/md/chevron-right'
 import logo from '../img/logo.png'
-import {
-	Container,
-	Navbar,
-	NavbarBrand,
-	NavbarBurger,
-	NavbarItem,
-	NavbarMenu,
-	NavbarStart,
-	NavbarLink,
-	NavbarEnd,
-} from 'bloomer'
 
 class Header extends Component {
 	constructor(props) {
@@ -28,26 +17,28 @@ class Header extends Component {
 	render() {
 		return (
 			<Headroom>
-				<Navbar className="is-primary">
-					<Container>
-						<NavbarBrand>
+				<div className="navbar is-primary">
+					<div className="container">
+						<div className="navbar-brand">
 							<Link to="/" className="navbar-item">
-								<img src={logo} alt="易信" height="60" />易信房屋装修
+								<img src={logo} alt="易信" height="60" />易信建筑装修
 							</Link>
-							<NavbarBurger
+							<div
+								className="navbar-burger"
 								isActive={this.state.isActive}
 								onClick={this.handleToggle}
 							/>
-						</NavbarBrand>
-						<NavbarMenu
+						</div>
+						<div
+							ClassName="navbar-menu"
 							isActive={this.state.isActive}
 							onClick={this.handleToggle}
 						>
-							<NavbarEnd>
-								<a href="/#室内" aria-label="室内装修" className="navbar-item">
+							<div className="navbar-end">
+								<a href="#室内" aria-label="室内装修" className="navbar-item">
 									室内装修
 								</a>
-								<a href="/#户外" aria-label="户外装修" className="navbar-item">
+								<a href="#户外" aria-label="户外装修" className="navbar-item">
 									户外装修
 								</a>
 								<Link to="/contact" className="navbar-item">
@@ -55,10 +46,10 @@ class Header extends Component {
 										<ChevronRight />网上报价
 									</div>
 								</Link>
-							</NavbarEnd>
-						</NavbarMenu>
-					</Container>
-				</Navbar>
+							</div>
+						</div>
+					</div>
+				</div>
 			</Headroom>
 		)
 	}
